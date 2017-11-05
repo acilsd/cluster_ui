@@ -1,0 +1,15 @@
+{
+  "presets": [
+    ["env", { "modules": false }],
+    "stage-0",
+    "react",
+    "flow"
+  ],
+  "plugins": [
+    "babel-polyfill",
+    "react-hot-loader/babel",
+    "transform-decorators-legacy",
+    "emotion",
+    "react-html-attrs"
+  ]
+}
