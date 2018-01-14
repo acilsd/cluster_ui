@@ -1,0 +1,56 @@
+[Unit]
+Description=Truth System LDAP Server
+Documentation=https://docs.truth.world
+After=network-online.target docker.socket firewalld.service
+Wants=network-online.target
+Requires=docker.socket
+
+[Service]
+Type=simple
+# this unit is based on debian's docker unit.
+# workarounds left untouch.
+# TODO: remove this crutch.
+#
+# the default is not to use systemd for cgroups because the delegate issues still
+# exists and systemd currently does not support the cgroup feature set required
+# for containers run by docker
+ExecStartPre=-/usr/bin/docker stop shepherd
+ExecStartPre=-/usr/bin/docker kill shepherd
+ExecStartPre=-/usr/bin/docker rm shepherd
+ExecStart=-/usr/bin/docker run \
+    --env LDAP_ADMIN_PASSWORD="truth-f9649b2b905b849f502382ce87033bcd" \
+    --env LDAP_CONFIG_PASSWORD="truth-f9649b2b905b849f502382ce87033bcd" \
+    --env LDAP_READONLY_USER="true" \
+    --env LDAP_READONLY_USER_USERNAME="manager" \
+    --env LDAP_READONLY_USER_PASSWORD="truth-47147b029d527472b69eb7a49787a54c" \
+    --env LDAP_BACKEND="hdb" \
+    --env LDAP_TLS="false" \
+    --env LDAP_TLS_VERIFY_CLIENT="false" \
+    --env LDAP_ORGANISATION="Truth" \
+    --env LDAP_DOMAIN="truth.world" \
+    -tv /var/workspace/www/php:/var/www/html \
+    --name shepherd \
+    truths:php-cli
+#ExecStartPost=-/usr/bin/docker logs -f truth-php-cli
+KillMode=none
+ExecStop=-/usr/bin/docker stop shepherd
+LimitNOFILE=8192
+# Having non-zero Limit*s causes performance problems due to accounting overhead
+# in the kernel. We recommend using cgroups to do container-local accounting.
+LimitNPROC=2048
+LimitCORE=2
+# Uncomment TasksMax if your systemd version supports it.
+# Only systemd 226 and above support this version.
+# TasksMax=infinity
+TimeoutStartSec=180
+# set delegate yes so that systemd does not reset the cgroups of docker containers
+# Delegate=yes
+# kill only the docker process, not all processes in the cgroup
+# KillMode=process
+# restart the docker process if it exits prematurely
+Restart=on-failure
+StartLimitBurst=3
+StartLimitInterval=60s
+
+[Install]
+WantedBy=multi-user.target

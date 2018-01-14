@@ -1,3 +1,3 @@
-node_modules
-.config
-*.log
+www/js/node_modules
+www/js/.config
+www/js/*.log

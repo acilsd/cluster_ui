@@ -1,0 +1,7 @@
+dn: cn=test,cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: test
+olcObjectClasses: ( 1.1.1.1.1.74.104.178.120 NAME 'trueTypePony'
+  SUP 'trueObject' STRUCTURAL
+  MAY ( PonyName $ ponyCity
+  ) )

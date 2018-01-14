@@ -1,0 +1,4 @@
+objectclass ( 1.1.1.1.1.74.104.178.120 NAME 'trueTypePony'
+    SUP 'trueObject' STRUCTURAL
+    MAY ( PonyName $ ponyCity
+    ) )

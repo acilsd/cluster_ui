@@ -1,0 +1,49 @@
+olcAttributeTypes: ( 1.1.4.1 NAME 'dockerImage' DESC 'docker image with repository and version' 
+    EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} )
+
+olcAttributeTypes: ( 1.1.4.2 NAME 'dockerVolume' DESC 'host:container volume pair' 
+    EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} )
+
+olcAttributeTypes: ( 1.1.4.3 NAME 'dockerPort' DESC 'host:container port pair' 
+    EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} )
+
+olcAttributeTypes: ( 1.1.4.4 NAME 'token' DESC 'security token' 
+    EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} )
+
+olcAttributeTypes: ( 1.1.4.5 NAME 'status' DESC 'status' 
+    EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} )
+
+objectclass ( 1.1.6.1.4.1.2428.20.203 NAME 'trueObject'
+    SUP 'top' STRUCTURAL
+    MUST ( dc $ associateddomain )
+    MAY ( cn $ description $ TXTRecord $ ARecord $ MDRecord $ MXRecord $ NSRecord $ SOARecord $ CNAMERecord 
+    ) )
+
+objectclass ( 1.1.6.1.4.1.2428.20.204 NAME 'trueUser'
+    SUP 'trueObject' STRUCTURAL
+    MUST ( cn $ givenName $ gidNumber $ homeDirectory $ sn $ loginShell $ userPassword $ uidNumber $ uid )
+    MAY ( gecos $ shadowLastChange $ shadowMin $ shadowMax $ shadowWarning $ shadowInactive $ shadowExpire $ shadowFlag $ host )
+    ) )
+
+objectclass ( 1.1.6.1.4.1.2428.20.205 NAME 'trueService'
+    SUP 'trueObject' STRUCTURAL
+    MUST ( ipServicePort $ ipServiceProtocol )
+    MAY ( dockerImage $ dockerVolume $ dockerPort )
+    )
+
+objectclass ( 1.1.6.1.4.1.2428.20.206 NAME 'trueUnit'
+    SUP 'trueObject' STRUCTURAL
+    MUST ( ou
+    ) )
+
+objectclass ( 1.1.6.1.4.1.2428.20.207 NAME 'trueGroup'
+    SUP 'trueObject' STRUCTURAL
+    MUST ( cn $ gidNumber ) MAY ( userPassword $ memberUid
+        $ shadowLastChange $ shadowMin $ shadowMax $ shadowWarning $ shadowInactive $ shadowExpire $ shadowFlag 
+        $ businessCategory $ seeAlso $ owner $ ou $ o $ member
+    ) )
+
+objectclass ( 1.1.6.1.4.1.2428.20.208 NAME 'trueToken'
+    SUP 'trueObject' STRUCTURAL
+    MUST ( token $ status
+    ) )

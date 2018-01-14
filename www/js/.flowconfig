@@ -1,0 +1,19 @@
+[ignore]
+.*/node_modules/emotion/.*
+<PROJECT_ROOT>/public/.*
+
+[libs]
+<PROJECT_ROOT>/flow-typed/
+
+[options]
+module.name_mapper='Auth' -> '<PROJECT_ROOT>/src/applications/AuthApp/'
+module.name_mapper='Trixie' -> '<PROJECT_ROOT>/src/applications/TrixieApp/'
+module.name_mapper='Wiki' -> '<PROJECT_ROOT>/src/applications/WikiApp/'
+
+module.name_mapper='components' -> '<PROJECT_ROOT>/src/components/'
+module.name_mapper='helpers' -> '<PROJECT_ROOT>/src/helpers/'
+module.name_mapper='layout' -> '<PROJECT_ROOT>/src/layout/'
+
+module.use_strict=true
+esproposal.class_static_fields=enable
+esproposal.class_instance_fields=enable

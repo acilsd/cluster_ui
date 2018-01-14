@@ -1,0 +1,30 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+	root /var/www/html/js;
+	index index.html
+
+	server_name SERVER_NAME.truths.world;
+	
+    location / {
+    
+		proxy_set_header Host $http_host;
+		
+		if ($request_method = POST) 
+		{ 
+		  proxy_pass http://PROXY_IP:POST_PORT;
+		}
+		
+		if (-e $request_filename) {
+			rewrite ^(.*)$ /$1 break;
+		}
+		
+		if ($request_method = GET) 
+		{ 
+		  proxy_pass http://PROXY_IP:GET_PORT;
+		}
+		
+		error_page 404 /index.html;
+    }
+}

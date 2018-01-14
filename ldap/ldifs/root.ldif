@@ -1,0 +1,517 @@
+# extended LDIF
+#
+# LDAPv3
+# base <dc=${cname}> with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# ${cname}
+dn: dc=${cname}
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: Truth
+dc: ${cname}
+
+# admin, ${cname}
+dn: cn=admin,dc=${cname}
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: admin
+description: LDAP administrator
+userPassword:: e1NTSEF9ci9QbnA1MlBETkFHRlF3TksrcmJnT00xaDkyeTN1TGU=
+
+# manager, ${cname}
+dn: cn=manager,dc=${cname}
+cn: manager
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+userPassword:: e1NTSEF9UlNsRUN6d2xZTytENVU3YW1jcXpDalgvSFhDRldHM0Q=
+description: LDAP read only user
+
+# world.${cname}
+dn: dc=world,dc=${cname}
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: World
+dc: world
+
+# truths.world.${cname}
+dn: dc=truths,dc=world,dc=${cname}
+objectClass: top
+objectClass: trueUnit
+ou: truth
+dc: truths
+sOARecord: ${cname}.truths.world me@truths.world 1 1800 3600 86400 0
+nSRecord: ${cname}.truths.world
+mXRecord: 10 mail.truths.world
+mXRecord: 20 mail2.truths.world
+associatedDomain: truths.world
+aRecord: ${ip}
+
+# ${cname}.truths.world.${cname}
+dn: dc=${cname},dc=truths,dc=world,dc=${cname}
+objectClass: top
+objectClass: trueUnit
+ou: truth
+dc: ${cname}
+associatedDomain: ${cname}.truths.world
+aRecord: ${ip}
+
+# users.truths.world.${cname}
+dn: dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+objectClass: trueUnit
+objectClass: top
+ou: users
+dc: users
+associatedDomain: users.${cname}.truths.world
+aRecord: ${ip}
+
+# groups.${cname}.truths.world.${cname}
+dn: dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+objectClass: trueUnit
+objectClass: top
+dc: groups
+ou: groups
+associatedDomain: groups.${cname}.truths.world
+aRecord: ${ip}
+
+dn: dc=ui,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+cn: ui
+dc: ui
+gidNumber: 5000
+objectClass: trueGroup
+objectClass: top
+associatedDomain: ui.groups.${cname}.truths.world
+aRecord: ${ip}
+member: dc=acilsd,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=null,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=x4fab,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=che,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=insci,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=alexanderisora,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+
+dn: dc=i18n,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+cn: i18n
+dc: i18n
+gidNumber: 5001
+objectClass: trueGroup
+objectClass: top
+associatedDomain: i18n.groups.${cname}.truths.world
+aRecord: ${ip}
+member: dc=alexanderisora,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=breeze,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=njenner,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+
+dn: dc=server,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+cn: server
+dc: server
+gidNumber: 5002
+objectClass: trueGroup
+objectClass: top
+associatedDomain: server.groups.${cname}.truths.world
+aRecord: ${ip}
+member: dc=insci,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=fesst,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=x4fab,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=ashasu,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=acilsd,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=klargDeThaym,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=che,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=null,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=njenner,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=psmith,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=aphreet,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+gidNumber: 5106
+
+# users.groups.${cname}.truths.world.${cname}
+dn: dc=users,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+cn: users
+dc: users
+gidNumber: 5100
+objectClass: trueGroup
+objectClass: top
+associatedDomain: users.groups.${cname}.truths.world
+aRecord: ${ip}
+member: dc=i18n,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=server,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=ui,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=API,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=proofreading,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=scripting,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=translation,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=infraci,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+
+dn: dc=scripting,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+associatedDomain: scripting.groups.${cname}.truths.world
+cn: scripting
+dc: scripting
+objectClass: trueGroup
+objectClass: top
+member: dc=che,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=snowpony,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=fenrix,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+gidNumber: 5105
+
+dn: dc=infraci,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+associatedDomain: infra.groups.${cname}.truths.world
+cn: infraci
+objectClass: trueGroup
+objectClass: top
+member: dc=insci,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=che,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=snowpony,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=ashasu,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=fenrix,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=izzekil,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+gidNumber: 5103
+dc: infraci
+
+dn: dc=api,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+associatedDomain: api.groups.${cname}.truths.world
+cn: api
+dc: api
+objectClass: trueGroup
+objectClass: top
+member: dc=che,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=acilsd,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=fesst,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=aphreet,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=x4fab,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=psmith,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+gidNumber: 5101
+
+dn: dc=proofreading,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+associatedDomain: proofreading.groups.${cname}.truths.world
+cn: proofreading
+dc: proofreading
+objectClass: trueGroup
+objectClass: top
+member: dc=diana,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=klargDeThaym,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=breeze,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=fesst,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+gidNumber: 5104
+
+dn: dc=translation,dc=groups,dc=${cname},dc=truths,dc=world,dc=${cname}
+associatedDomain: translation.groups.${cname}.truths.world
+cn: translation
+dc: translation
+objectClass: trueGroup
+objectClass: top
+member: dc=breeze,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=psmith,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=njenner,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=klargDeThaym,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=che,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+member: dc=diana,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+gidNumber: 5107
+
+# che.users.${cname}.truths.world.${cname}
+dn: dc=che,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+cn: Alex Rakulenko
+givenName: Alex
+gidNumber: 5000
+homeDirectory: /home/users/che
+sn: Rakulenko
+loginShell: /bin/zsh
+userPassword:: e1NTSEF9WVQ0eW9SRG5jTlErK0ZVQnl0US81OFBxaWJXVUNVY20=
+uidNumber: 1000
+uid: che
+dc: che
+objectClass: trueUser
+objectClass: posixAccount
+objectClass: top
+associatedDomain: che.users.${cname}.truths.world
+aRecord: ${ip}
+
+# diana.users.${cname}.truths.world.${cname}
+dn: dc=diana,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+givenName: Armour
+gidNumber: 5000
+homeDirectory: /home/users/diana
+sn: Shy
+objectClass: trueUser
+objectClass: posixAccount
+objectClass: top
+userPassword:: e1NTSEF9VFBWd2V1b2JIeVhpbzJtblYyUEc4T05obG4wUUxCWkw=
+uidNumber: 1001
+uid: diana
+dc: diana
+loginShell: /bin/bash
+cn: ArmorShy
+associatedDomain: che.users.${cname}.truths.world
+aRecord: ${ip}
+
+# services.${cname}.truths.world.${cname}
+dn: dc=services,dc=${cname},dc=truths,dc=world,dc=${cname}
+objectClass: trueUnit
+objectClass: top
+ou: services
+dc: services
+associatedDomain: services.${cname}.truths.world
+aRecord: ${ip}
+
+# breeze.users.${cname}.truths.world.${cname}
+dn: dc=breeze,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+givenName: Sapphire
+gidNumber: 5000
+homeDirectory: /home/users/breeze
+sn: Breeze
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+userPassword:: e1NTSEF9dDZIakhRd29xRGVxd1ZQa3hiWk5SWDhpazBydXlBbjE=
+uidNumber: 1002
+uid: breeze
+dc: breeze
+cn: SapphireBreeze
+associatedDomain: breeze.users.${cname}.truths.world
+aRecord: ${ip}
+
+# acilsd.users.${cname}.truths.world.${cname}
+dn: dc=acilsd,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+cn: Acilsd
+givenName: Striped
+gidNumber: 5000
+homeDirectory: /home/users/acilsd
+sn: Mare
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+userPassword:: e1NTSEF9VzNOMDVEM3lLMW5uMDdVS3IrdjlCN0wvSUoxZU43dG4=
+uidNumber: 1004
+uid: acilsd
+dc: acilsd
+associatedDomain: acilsd.users.${cname}.truths.world
+aRecord: ${ip}
+
+# klargDeThaym.users.${cname}.truths.world.${cname}
+dn: dc=klargDeThaym,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+cn: KlargDeThaym
+givenName: Klarg
+gidNumber: 5000
+homeDirectory: /home/users/klargdethaym
+sn: DeThaym
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+userPassword:: e1NTSEF9bDlndlNCZTYrUWc3N3RYanVRVTl3SXpybVlvc09Kdk4=
+uidNumber: 1005
+uid: klargdethaym
+dc: klargdethaym
+associatedDomain: klargdethaym.users.${cname}.truths.world
+aRecord: ${ip}
+
+# insci.users.${cname}.truths.world.${cname}
+dn: dc=insci,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+cn: insci
+givenName: i
+gidNumber: 5000
+homeDirectory: /home/users/insci
+sn: nsci
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+userPassword:: e1NTSEF9eWxWTEdHVkVzUmhRT1Erd1ByNTVsMWpLU1llYkxFSTY=
+uidNumber: 1006
+uid: insci
+dc: insci
+associatedDomain: insci.users.${cname}.truths.world
+aRecord: ${ip}
+
+# fesst.users.${cname}.truths.world.${cname}
+dn: dc=fesst,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+cn: Motley fesst
+givenName: Motley
+gidNumber: 5000
+homeDirectory: /home/users/fesst
+sn: fesst
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+userPassword:: e1NTSEF9dU1ocmVZWmMzbVdCQjhvazZTU1BJSnFJYVVUaEpoRlQ=
+uidNumber: 1007
+uid: fesst
+dc: fesst
+associatedDomain: fesst.users.${cname}.truths.world
+aRecord: ${ip}
+
+# x4fab.users.${cname}.truths.world.${cname}
+dn: dc=x4fab,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+cn: x4fab
+givenName: Lisa
+gidNumber: 5000
+homeDirectory: /home/users/x4fab
+sn: Simpson
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+userPassword:: e1NTSEF9VEFOV0hYWXBLVWpIZlpTY1FmNEdhS0toZkRwRy8vYXE=
+uidNumber: 1008
+uid: x4fab
+dc: x4fab
+associatedDomain: x4fab.users.${cname}.truths.world
+aRecord: ${ip}
+
+# ashasu.users.${cname}.truths.world.${cname}
+dn: dc=ashasu,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+cn: Ashasu
+givenName: Sasha
+gidNumber: 5000
+homeDirectory: /home/users/ashasu
+sn: Su
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+userPassword:: e1NTSEF9NGluYjBsUFREMkpqYUY3NE14L0duaURPakNhRVZUZ28=
+uidNumber: 1009
+uid: ashasu
+dc: ashasu
+associatedDomain: ashasu.users.${cname}.truths.world
+aRecord: ${ip}
+
+# null.users.${cname}.truths.world.${cname}
+dn: dc=null,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+cn: Null
+givenName: Kirisa
+gidNumber: 5000
+homeDirectory: /home/users/null
+sn: Lolisa
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+userPassword:: e1NTSEF9S0swaDFKWlZtS0ZXamg3SHpKeWNRVDZVb3FoYktJM1A=
+uidNumber: 1010
+uid: null
+dc: null
+associatedDomain: null.users.${cname}.truths.world
+aRecord: ${ip}
+
+# alexanderisora.users.${cname}.truths.world.${cname}
+dn: dc=alexanderisora,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+cn: Alexanderisora
+givenName: Sweetie
+gidNumber: 5000
+homeDirectory: /home/users/alexanderisora
+sn: Belle
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+userPassword:: e1NTSEF9R1V5dkVJRUdNUjI2SVBDS0p3TXVSV05UUkFvMk9xdGo=
+uidNumber: 1011
+uid: alexanderisora
+dc: alexanderisora
+associatedDomain: alexanderisora.users.${cname}.truths.world
+aRecord: ${ip}
+
+# psmith.users.${cname}.truths.world.${cname}
+dn: dc=psmith,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+cn: Philip Smith
+givenName: Philip
+gidNumber: 5000
+homeDirectory: /home/users/psmith
+sn: Smith
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+userPassword:: e1NTSEF9MUtSbnpmbkUvTUZDc0lPaEpnWnhWNVlWaXo5OG5jbDU=
+uidNumber: 1012
+uid: psmith
+dc: psmith
+associatedDomain: psmith.users.${cname}.truths.world
+aRecord: ${ip}
+
+# njenner.users.${cname}.truths.world.${cname}
+dn: dc=njenner,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+cn: Nick Jenner
+givenName: Nick
+gidNumber: 5000
+homeDirectory: /home/users/njenner
+sn: Jenner
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+userPassword:: e1NTSEF9WFZNVjJ4OU5RTnltVE1JNUJPNUtISnJIdHJkdTJVanY=
+uidNumber: 1013
+uid: njenner
+dc: njenner
+associatedDomain: njenner.users.${cname}.truths.world
+aRecord: ${ip}
+
+dn: dc=snowpony,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+associatedDomain: snowpony.users.${cname}.truths.world
+cn: Snowpony
+dc: snowpony
+gidNumber: 5000
+givenName: Snow
+homeDirectory: /home/users/snowpony
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+userPassword:: e1NTSEF9dlJ5ejltcEJEc3NkNjBlRm5veW1PY210NTBwczZuNGo=
+sn: Pony
+uidNumber: 1014
+uid: snowpony
+
+dn: dc=fenrix,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+associatedDomain: fenrix.users.${cname}.truths.world
+cn: fenrix
+dc: fenrix
+gidNumber: 5000
+givenName: Fen
+homeDirectory: /home/users/fenrix
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+userPassword:: e1NTSEF9ZXZOZGViL2t3Wis1TEp0UUpjQkFHMERUVDZQYUpNUnI=
+sn: Rix
+uidNumber: 1015
+uid: fenrix
+
+dn: dc=izzekil,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+associatedDomain: izzekil.users.${cname}.truths.world
+cn: izzekil
+dc: izzekil
+gidNumber: 5000
+givenName: Nikolay
+homeDirectory: /home/users/izzekil
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+userPassword:: e1NTSEF9WVF3WmNYM1plS0E1MHY5VHZ6eElNemdCTkFQTkNEeHA=
+sn: Rumyantsev
+uidNumber: 1016
+uid: izzekil
+
+dn: dc=aphreet,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+associatedDomain: aphreet.users.${cname}.truths.world
+cn: aphreet
+dc: aphreet
+gidNumber: 5000
+givenName: Mikhail
+homeDirectory: /home/users/aphreet
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+userPassword:: e1NTSEF9aWRnenprRFpzdW1WNFpOVzdWQzcyTnBCTGtPZDh2MWc=
+sn: Malygin
+uidNumber: 1017
+uid: aphreet
+
+dn: dc=testuser,dc=users,dc=${cname},dc=truths,dc=world,dc=${cname}
+associatedDomain: testuser.users.${cname}.truths.world
+cn: testuser
+dc: testuser
+gidNumber: 5000
+givenName: Test
+homeDirectory: /home/users/testuser
+loginShell: /bin/bash
+objectClass: trueUser
+objectClass: top
+sn: User
+uidNumber: 1018
+uid: testuser
+userPassword:: e1NTSEF9U3poSUNUNlZPc2ltcDMrcUtaMDM5MU93U2wrV0ZFT28=
