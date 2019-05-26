@@ -1,3 +1,0 @@
-<?php
-
-$conf['class'] = 'ObjectPost';

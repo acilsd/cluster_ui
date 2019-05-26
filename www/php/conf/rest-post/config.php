@@ -1,4 +1,0 @@
-<?php
-
-$conf['class'] = 'RestPost';
-
